@@ -15,8 +15,8 @@ public class Main {
 
 	    System.out.println(String.format("Hello %s, ID number %s", name, id));
 
-	    Account person = new Account(name, id);
-		person.deposit();
+	    BankAccount person = new BankAccount(name, id);
+		person.withdraw();
 
 //		Account one = new Account("Tan", "123");
 //		one.checkBalance();
@@ -26,14 +26,13 @@ public class Main {
     }
 }
 
-class Account {
+class BankAccount {
 	String aName, aID;
 	double balance = 10000;
 
-	Account(String name, String id) {
+	BankAccount(String name, String id) {
 		aName = name;
 		aID = id;
-
 	}
 
 	void checkBalance() {
@@ -42,10 +41,22 @@ class Account {
 
 	void deposit() {
 		System.out.print("Enter the amount to deposit: ");
-		Scanner inputAmount = new Scanner(System.in);
-		double amount = inputAmount.nextDouble();
-		balance += amount;
-		System.out.println(String.format("Deposited $%,.2f successfully.", amount));
+		Scanner deposit = new Scanner(System.in);
+		double dAmount = deposit.nextDouble();
+		balance += dAmount;
+		System.out.println(String.format("Deposited $%,.2f successfully.", dAmount));
+	}
+
+	void withdraw() {
+		System.out.print("Enter the amount to withdraw: ");
+		Scanner withdraw = new Scanner(System.in);
+		double wAmount = withdraw.nextDouble();
+		if (balance < wAmount) {
+			System.out.println("Withdraw amount exceeds current balance.");
+		} else {
+			balance -= wAmount;
+			System.out.println(String.format("Withdrew $%,.2f successfully.", wAmount));
+		}
 	}
 
 }
