@@ -6,6 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
     	String name, id;
+    	// Taking user inputs for name and id
 	    System.out.print("Please enter your name: ");
 	    Scanner nInput = new Scanner(System.in);
 	    name = nInput.next();
@@ -15,14 +16,10 @@ public class Main {
 
 	    System.out.println(String.format("Hello %s, ID number %s", name, id));
 
-	    BankAccount person = new BankAccount(name, id);
-		person.withdraw();
-
-//		Account one = new Account("Tan", "123");
-//		one.checkBalance();
-//		double test = 10000;
-//		System.out.println(String.format("Your current balance is: $%,.2f", test));
-
+	    // Created a new object - person, from the type BankAccount, and pass in name, id as arguments
+		BankAccount person = new BankAccount(name, id);
+		// Invoke showOptions method in the person object
+		person.showOptions();
     }
 }
 
@@ -30,6 +27,7 @@ class BankAccount {
 	String aName, aID;
 	double balance = 10000;
 
+	// Contructor BankAccount has to have the same name as the class and no identifier.
 	BankAccount(String name, String id) {
 		aName = name;
 		aID = id;
@@ -59,4 +57,36 @@ class BankAccount {
 		}
 	}
 
+	void showOptions() {
+		System.out.println("Please follow the menu option below:");
+		System.out.println("\t Press 1 to check balance.");
+		System.out.println("\t Press 2 to deposit.");
+		System.out.println("\t Press 3 to withdraw.");
+		System.out.println("\t Press 9 to exit.");
+
+		int option;
+		do {
+			System.out.println("\n");
+			System.out.print("Please choose your option: ");
+			Scanner inputOption = new Scanner(System.in);
+			option = inputOption.nextInt();
+
+			switch (option) {
+				case 1:
+					checkBalance();
+					break;
+				case 2:
+					deposit();
+					break;
+				case 3:
+					withdraw();
+					break;
+				case 9:
+					break;
+				default:
+					System.out.println("Please enter a valid option.");
+					break;
+			}
+		} while (option != 9);
+	}
 }
